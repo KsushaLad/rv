@@ -14,11 +14,7 @@ class DetailsActivity : AppCompatActivity() {
         binding = DetailsBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        val ss: String = intent.getStringExtra("id").toString()
-        val s1: String = intent.getStringExtra("name").toString()
-        val s2: String = intent.getStringExtra("description").toString()
-        binding.textView.text = ss
-        binding.textView3.text = s1
-        binding.textView2.text = s2
+        binding.textView.text = intent.getStringExtra("all")
+
     }
 }

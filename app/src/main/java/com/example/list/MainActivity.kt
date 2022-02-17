@@ -1,5 +1,6 @@
 package com.example.list
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,21 +18,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         val recyclerView: RecyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = CatsAdapter(list(), lists())
-    }
+        recyclerView.adapter = ItemAdapter()
 
-    private fun list() : List<String>{
-        val data = mutableListOf<String>()
-        (0 until 20).map{
-          data.add(Item(id = it, name = "name $it", description = "description$it").toString() )}
-        return data
-    }
 
-    private fun lists() : MutableList<Item?>{
-        val data = mutableListOf<Item?>()
-        (0 until 20).map{
-            Item(id = it, name = "name $it", description = "description$it").toString()}
-        return data
     }
 
 }
