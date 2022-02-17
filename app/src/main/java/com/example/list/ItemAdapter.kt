@@ -16,32 +16,14 @@ class ItemAdapter : ListAdapter<Item, ItemAdapter.ItemViewHolder>(ItemDiffUtil()
         val binding = RecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ItemViewHolder(binding)
     }
-    
+
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = mutableListOf<Item>()
-        for (i in 0 .. 20){
-            item.add(Item( i, "$i",  "$i"))
-        }
-        holder.largeTextView.text =  names()[position]//submitList(item).toString()
+        holder.largeTextView.text =  currentList[position].name//submitList(item).toString()
         holder.itemView.setOnClickListener { v ->
             val intent = Intent(holder.largeTextView.context, DetailsActivity::class.java)
-            intent.putExtra("all", list()[position]) //currentList[position]
+            intent.putExtra("all", currentList[position].toString()) //currentList[position]
             v.context.startActivity(intent)
         }
-    }
-
-    private fun names() : List<String>{
-        val data = mutableListOf<String>()
-        (0 until 20).map{
-            data.add("name=$it").toString() }
-        return data
-    }
-
-    private fun list() : List<String>{
-        val data = mutableListOf<String>()
-        (0 until 20).map{
-            data.add(Item( it, "$it",  "$it").toString() )}
-        return data
     }
 
     inner class ItemViewHolder(binding: RecyclerviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -57,7 +39,4 @@ class ItemAdapter : ListAdapter<Item, ItemAdapter.ItemViewHolder>(ItemDiffUtil()
             return oldItem == newItem
         }
     }
-
-   override fun getItemCount() = list().size //delete
-
 }

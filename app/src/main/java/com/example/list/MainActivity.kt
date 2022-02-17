@@ -18,9 +18,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         val recyclerView: RecyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = ItemAdapter()
-
-
+        val adapter = ItemAdapter()
+        recyclerView.adapter = adapter
+        val list = (0 until 20).map{
+            Item(id = it, name = "name$it", description = "description$it")
+        }
+        adapter.submitList(list)
     }
-
 }
