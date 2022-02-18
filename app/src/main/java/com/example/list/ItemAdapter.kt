@@ -1,10 +1,11 @@
 package com.example.list
 
-import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -18,10 +19,16 @@ class ItemAdapter : ListAdapter<Item, ItemAdapter.ItemViewHolder>(ItemDiffUtil()
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.largeTextView.text =  currentList[position].name//submitList(item).toString()
+        holder.largeTextView.text =  currentList[position].name
         holder.itemView.setOnClickListener { v ->
             val intent = Intent(holder.largeTextView.context, DetailsActivity::class.java)
-            intent.putExtra("all", currentList[position].toString()) //currentList[position]
+           // intent.putExtra("id", currentList[position].id)
+            val preferences = holder.largeTextView.context.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+            val editor = preferences.edit()
+            editor.putString("name", currentList[position].id.toString())
+            editor.apply()
+            intent.putExtra("name", currentList[position].name)
+            intent.putExtra("desc", currentList[position].description)
             v.context.startActivity(intent)
         }
     }
